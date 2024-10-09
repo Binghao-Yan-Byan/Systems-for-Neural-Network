@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -fopenmp -flto -shared  -o graphpy.cpython-310-x86_64-linux-gnu.so CMakeFiles/graphpy.dir/kernel_pybind.cpp.o   -L/home/byan/CUDALearning/Assignment2/deep-codegen  -Wl,-rpath,/home/byan/CUDALearning/Assignment2/deep-codegen -lgp 
