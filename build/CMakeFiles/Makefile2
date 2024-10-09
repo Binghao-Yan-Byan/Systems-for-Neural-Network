@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/byan/CUDALearning/Assignment2/deep-codegen
+CMAKE_SOURCE_DIR = /home/byan/CUDALearning/Systems-for-Neural-Network
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/byan/CUDALearning/Assignment2/deep-codegen/build
+CMAKE_BINARY_DIR = /home/byan/CUDALearning/Systems-for-Neural-Network/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -100,14 +100,14 @@ pybind11/clean:
 CMakeFiles/graphpy.dir/all: CMakeFiles/libgp.so.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphpy.dir/build.make CMakeFiles/graphpy.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphpy.dir/build.make CMakeFiles/graphpy.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles --progress-num=1,2 "Built target graphpy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles --progress-num=1,2 "Built target graphpy"
 .PHONY : CMakeFiles/graphpy.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/graphpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/graphpy.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles 0
 .PHONY : CMakeFiles/graphpy.dir/rule
 
 # Convenience name for target.
@@ -126,14 +126,14 @@ CMakeFiles/graphpy.dir/clean:
 CMakeFiles/libgp.so.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libgp.so.dir/build.make CMakeFiles/libgp.so.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libgp.so.dir/build.make CMakeFiles/libgp.so.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles --progress-num=3 "Built target libgp.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles --progress-num=3 "Built target libgp.so"
 .PHONY : CMakeFiles/libgp.so.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/libgp.so.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/libgp.so.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles 0
 .PHONY : CMakeFiles/libgp.so.dir/rule
 
 # Convenience name for target.

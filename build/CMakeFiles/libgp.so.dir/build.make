@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/byan/CUDALearning/Assignment2/deep-codegen
+CMAKE_SOURCE_DIR = /home/byan/CUDALearning/Systems-for-Neural-Network
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/byan/CUDALearning/Assignment2/deep-codegen/build
+CMAKE_BINARY_DIR = /home/byan/CUDALearning/Systems-for-Neural-Network/build
 
 # Utility rule file for libgp.so.
 
@@ -70,8 +70,8 @@ CMakeFiles/libgp.so: ../kernel.cu
 CMakeFiles/libgp.so: ../kernel.h
 CMakeFiles/libgp.so: ../op.h
 CMakeFiles/libgp.so: ../Makefile
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Buidling libgp.so"
-	cd /home/byan/CUDALearning/Assignment2/deep-codegen && /usr/bin/gmake
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Buidling libgp.so"
+	cd /home/byan/CUDALearning/Systems-for-Neural-Network && /usr/bin/gmake
 
 libgp.so: CMakeFiles/libgp.so
 libgp.so: CMakeFiles/libgp.so.dir/build.make
@@ -86,6 +86,6 @@ CMakeFiles/libgp.so.dir/clean:
 .PHONY : CMakeFiles/libgp.so.dir/clean
 
 CMakeFiles/libgp.so.dir/depend:
-	cd /home/byan/CUDALearning/Assignment2/deep-codegen/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/byan/CUDALearning/Assignment2/deep-codegen /home/byan/CUDALearning/Assignment2/deep-codegen /home/byan/CUDALearning/Assignment2/deep-codegen/build /home/byan/CUDALearning/Assignment2/deep-codegen/build /home/byan/CUDALearning/Assignment2/deep-codegen/build/CMakeFiles/libgp.so.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/byan/CUDALearning/Systems-for-Neural-Network/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/byan/CUDALearning/Systems-for-Neural-Network /home/byan/CUDALearning/Systems-for-Neural-Network /home/byan/CUDALearning/Systems-for-Neural-Network/build /home/byan/CUDALearning/Systems-for-Neural-Network/build /home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles/libgp.so.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/libgp.so.dir/depend
 

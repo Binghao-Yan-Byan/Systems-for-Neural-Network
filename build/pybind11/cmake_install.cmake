@@ -1,4 +1,4 @@
-# Install script for directory: /home/byan/CUDALearning/Assignment2/deep-codegen/pybind11
+# Install script for directory: /home/byan/CUDALearning/Systems-for-Neural-Network/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
