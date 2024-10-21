@@ -73,15 +73,15 @@ CMakeFiles/graphpy.dir/kernel_pybind.cpp.o: CMakeFiles/graphpy.dir/flags.make
 CMakeFiles/graphpy.dir/kernel_pybind.cpp.o: ../kernel_pybind.cpp
 CMakeFiles/graphpy.dir/kernel_pybind.cpp.o: CMakeFiles/graphpy.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/graphpy.dir/kernel_pybind.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/graphpy.dir/kernel_pybind.cpp.o -MF CMakeFiles/graphpy.dir/kernel_pybind.cpp.o.d -o CMakeFiles/graphpy.dir/kernel_pybind.cpp.o -c /home/byan/CUDALearning/Systems-for-Neural-Network/kernel_pybind.cpp
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/graphpy.dir/kernel_pybind.cpp.o -MF CMakeFiles/graphpy.dir/kernel_pybind.cpp.o.d -o CMakeFiles/graphpy.dir/kernel_pybind.cpp.o -c /home/byan/CUDALearning/Systems-for-Neural-Network/kernel_pybind.cpp
 
 CMakeFiles/graphpy.dir/kernel_pybind.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/graphpy.dir/kernel_pybind.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/byan/CUDALearning/Systems-for-Neural-Network/kernel_pybind.cpp > CMakeFiles/graphpy.dir/kernel_pybind.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/byan/CUDALearning/Systems-for-Neural-Network/kernel_pybind.cpp > CMakeFiles/graphpy.dir/kernel_pybind.cpp.i
 
 CMakeFiles/graphpy.dir/kernel_pybind.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/graphpy.dir/kernel_pybind.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/byan/CUDALearning/Systems-for-Neural-Network/kernel_pybind.cpp -o CMakeFiles/graphpy.dir/kernel_pybind.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/byan/CUDALearning/Systems-for-Neural-Network/kernel_pybind.cpp -o CMakeFiles/graphpy.dir/kernel_pybind.cpp.s
 
 # Object files for target graphpy
 graphpy_OBJECTS = \

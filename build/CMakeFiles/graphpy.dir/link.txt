@@ -1,1 +1,1 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG -fopenmp -flto -shared  -o graphpy.cpython-310-x86_64-linux-gnu.so CMakeFiles/graphpy.dir/kernel_pybind.cpp.o   -L/home/byan/CUDALearning/Systems-for-Neural-Network  -Wl,-rpath,/home/byan/CUDALearning/Systems-for-Neural-Network -lgp 
+/usr/bin/g++ -fPIC -O3 -DNDEBUG -fopenmp -flto -shared  -o graphpy.cpython-310-x86_64-linux-gnu.so CMakeFiles/graphpy.dir/kernel_pybind.cpp.o   -L/home/byan/CUDALearning/Systems-for-Neural-Network  -Wl,-rpath,/home/byan/CUDALearning/Systems-for-Neural-Network -lgp 
