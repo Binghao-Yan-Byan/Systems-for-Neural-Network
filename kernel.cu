@@ -1,5 +1,5 @@
 #include "kernel.h"
-
+#include <iostream>
 __global__
 void gemm(float *input1, float *input2, int N, int D, int M, float *output){
     int rowIdx = blockIdx.x;
@@ -23,16 +23,17 @@ void gemm(array2d_t<float>& input1, array2d_t<float>& input2, array2d_t<float>& 
 }
 
 __global__
-void spmm(int *ptrs, int *dstsource, float *degree, float *features, int N, int F, float *output){
+void spmm(float *ptrs, float *dstsource, float *degree, float *features, int N, int F, float *output){
     int rowIdx = blockIdx.x;
     int colIdx = threadIdx.x;
     int colStep = blockDim.x;
-    int offset = ptrs[rowIdx], boundary = ptrs[rowIdx+1];
+    int offset = int(ptrs[rowIdx]), boundary = int(ptrs[rowIdx+1]);
     float ni = degree[rowIdx];
-    for(int k = offset; k < offset; k ++){
-        float nj = degree[dstsource[offset+k]];
+    for(int k = offset; k < boundary; k ++){
+        int dst = dstsource[k];
+        float nj = degree[dst];
         for(int j = colIdx; j < F; j += colStep){
-            output[rowIdx*F+j] += ni*nj*features[rowIdx*F+j];
+            output[rowIdx*F+j] += ni*nj*features[dst*F+j];
         }
     }
 }
@@ -44,7 +45,7 @@ void spmm(int *ptrs, int *dstsource, float *degree, float *features, int N, int 
  * input4: feature matrix  num_nodes x num_features
  * output: output[i, :] = input2[i]*input2[j]*input3[j] if (i, j) in edges
  */
-void spmm(array1d_t<int>& input1, array1d_t<int>& input2, array1d_t<float>& input3, array2d_t<float>& input4, array2d_t<float>& output){
+void spmm(array1d_t<float>& input1, array1d_t<float>& input2, array1d_t<float>& input3, array2d_t<float>& input4, array2d_t<float>& output){
     int N = input4.row_count;
     int F = input4.col_count;
     int threadsPerBlock = 64;

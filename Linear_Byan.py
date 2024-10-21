@@ -26,7 +26,10 @@ class Linear_Byan(torch.nn.Module):
             init.uniform_(self.bias, -bound, bound)
     
     def forward(self, input):
-        return pytorch_apis.gemm(input, self.weight, input.shape[0], self.out_features, self.device) + self.bias
+        result = pytorch_apis.gemm(input, self.weight, input.shape[0], self.out_features, self.device)
+        if self.bias is not None:
+            result += self.bias
+        return result
     
 
 
