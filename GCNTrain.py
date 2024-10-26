@@ -52,7 +52,6 @@ def train(hidden_feats, epoch_num, data, device = torch.device('cpu')):
     return model, g
 
 def eval(model, g):
-
     h = g.ndata['feat']
     test_mask = g.ndata['test_mask']
     labels = g.ndata['label']

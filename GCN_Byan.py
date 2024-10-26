@@ -3,16 +3,21 @@ import math
 import torch.nn.init as init
 import torch.nn.functional as F
 import pytorch_apis
+import numpy as np
+import graphpy
+import argparse
+import dgl
+import scipy.sparse as sp
 
 class GraphConv_Byan(torch.nn.Module):
     # Do similar things like torch.nn.modules.Linear
     def __init__(self, in_features: int, out_features: int, bias: bool = True, device = None, dtype = None):
-        factory_kwargs = {'device': device, 'dtype': dtype}
         super().__init__()
+        factory_kwargs = {'device': device, 'dtype': dtype}
         self.in_features = in_features
         self.out_features = out_features
         self.device = device
-        self.weight = torch.nn.Parameter(torch.empty((in_features, out_features), **factory_kwargs))
+        self.weight = torch.nn.Parameter(torch.empty(in_features, out_features, **factory_kwargs))
         if bias:
             self.bias = torch.nn.Parameter(torch.empty(out_features, **factory_kwargs))
         else:
@@ -27,20 +32,17 @@ class GraphConv_Byan(torch.nn.Module):
             init.uniform_(self.bias, -bound, bound)
     
     def forward(self, g, input):
-        ptrs, dsts, deg = g
-        #mat = torch.mm(input, self.weight)
         mat = pytorch_apis.gemm(input, self.weight, input.shape[0], self.out_features, self.device) 
-        result = pytorch_apis.spmm(ptrs, dsts, deg, mat, mat.shape[0], self.out_features, self.device)
-        #torch.mm(mat, self.weight)
+        result = pytorch_apis.gspmmv(g, mat, input.shape[0], self.out_features, self.device)
         if self.bias is not None:
-            result += self.bias
+            result = result + self.bias
         return result
     
 class GCN_Byan(torch.nn.Module):
-    def __init__(self, in_feats, hidden_feats, out_feats, device):
+    def __init__(self, in_features, hidden_features, out_features, device, bias=True):
         super().__init__()
-        self.conv1 = GraphConv_Byan(in_feats, hidden_feats, device=device)
-        self.conv2 = GraphConv_Byan(hidden_feats, out_feats, device=device)
+        self.conv1 = GraphConv_Byan(in_features, hidden_features, bias, device=device)
+        self.conv2 = GraphConv_Byan(hidden_features, out_features, bias, device=device)
 
     def forward(self, g, inputs):
         h = self.conv1(g, inputs)
@@ -50,20 +52,27 @@ class GCN_Byan(torch.nn.Module):
     
 if __name__ == "__main__":
     device = torch.device('cuda')
-    gb = GraphConv_Byan(2, 2, device=device)
-    gb2 = GraphConv_Byan(2, 2, device=device)
-    Ptr = torch.Tensor([0,2,3,5]).to(device)
-    Dst = torch.Tensor([0, 2, 1, 0, 2]).to(device)
-    Bs = torch.Tensor([[1, 1], [2, 2], [3, 3]]).to(device)
-    Bs.requires_grad_(True)
-    
-    Degree = torch.Tensor([1, 1, 1]).to(device)
-    g = (Ptr, Dst, Degree)
-    Cs = gb(g, Bs)
-    Cs = F.relu(Cs)
-    Cs = gb2(g, Cs)
-    print(Cs)
-    print(Cs.sum())
-    Cs.sum().backward()
-    print("$$$$$$$$"*5)
-    print(Bs.grad)
+    Ptr = np.array([0, 2, 4, 5, 7, 8], dtype=np.int32)
+    Dst = np.array([1, 4, 0, 3, 3, 1, 2, 0], dtype=np.int32)
+    Degree = np.array([1, 1, 1, 1, 1], dtype=np.int32)
+    a = graphpy.init_graph(Ptr, Dst, Degree)
+    spB = torch.Tensor([
+        [3, 6, 1, 9],
+        [7, 4, 2, 3],
+        [8, 6, 9, 2],
+        [5, 2, 8, 7],
+        [6, 9, 3, 1]
+    ]).requires_grad_(True)
+    _spB = spB.to(device)
+    model = GCN_Byan(5, 4, 2, device=device)
+    optimizer = torch.optim.SGD(model.parameters() ,lr=0.01)
+    Cspmm = model(a, _spB)
+    print(Cspmm)
+    spz = Cspmm.sum()
+    spz.backward()
+    print(spz.item())
+    print("GRAD"*10)
+    print(model.conv1.weight.data)
+    print(model.conv1.weight.grad)
+    optimizer.step()
+    print(model.conv1.weight.data)

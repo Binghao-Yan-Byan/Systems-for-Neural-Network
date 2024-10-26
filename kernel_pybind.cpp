@@ -91,17 +91,14 @@ PYBIND11_MODULE(graphpy, m) {
     .def("save_graph", &graph_t::save_graph)
     .def("get_vcount", &graph_t::get_vcount)
     .def("get_edge_count", &graph_t::get_ecount)
-
+    .def("print_graph", &graph_t::print_graph)
     ;
     
     
   m.def("init_graph",
-      [](py::array offset_csr, py::array nebrs_csr, py::array offset_csc, py::array nebrs_csc, int flag, int num_vcount) {
+      [](py::array offset_csr, py::array nebrs_csr, py::array dgrs_csr) {
            graph_t* graph =  new graph_t;
-           //cout<< offset_csr.shape(0) - 1<< "num_vcount"<< endl;
-           graph->init(offset_csr.shape(0) - 1, nebrs_csr.itemsize(), 
-                 offset_csr.request().ptr, nebrs_csr.request().ptr,
-                 offset_csc.request().ptr, nebrs_csc.request().ptr, flag, num_vcount);
+           graph->init(offset_csr.shape(0) - 1, nebrs_csr.shape(0), offset_csr.request().ptr, nebrs_csr.request().ptr, dgrs_csr.request().ptr);
             //THD_COUNT = thd_count;
            return graph;
       }

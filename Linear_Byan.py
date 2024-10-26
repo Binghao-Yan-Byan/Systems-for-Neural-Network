@@ -6,8 +6,8 @@ import pytorch_apis
 class Linear_Byan(torch.nn.Module):
     # Do similar things like torch.nn.modules.Linear
     def __init__(self, in_features: int, out_features: int, bias: bool = True, device=None, dtype=None):
-        factory_kwargs = {'device': device, 'dtype': dtype}
         super().__init__()
+        factory_kwargs = {'device': device, 'dtype': dtype}
         self.in_features = in_features
         self.out_features = out_features
         self.device = device

@@ -1,6 +1,4 @@
-import torch
 import torch.nn as nn
-import dgl
 import torch.nn.functional as F
 from dgl.nn import GraphConv
 
