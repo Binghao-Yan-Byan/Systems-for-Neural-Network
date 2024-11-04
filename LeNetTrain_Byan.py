@@ -28,7 +28,7 @@ def train(model, train_loader, criterion, optimizer, device, epochs=5):
             optimizer.step()
             loss += loss.item()
         print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss/len(train_loader):.4f}")
-        test(model, test_loader, device)
+        
 
 def test(model, test_loader, device):
     model.eval()

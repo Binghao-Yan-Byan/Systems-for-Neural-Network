@@ -57,7 +57,6 @@ def train(hidden_feats, epoch_num, data, device):
     
     model.train()
     for epoch in range(epoch_num):
-        
         logits = model(g_csr, h)
         loss = loss_fn(logits[train_mask], labels[train_mask])
         optimizer.zero_grad()
