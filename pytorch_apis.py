@@ -29,6 +29,8 @@ class gspmmv_impl(th.autograd.Function):
     def backward(ctx, dZ):
         graph, dim_0, dim_1, device0 = ctx.backward_cache
         res = gp_apis.gp_gspmmv(graph, dZ, dim_0, dim_1, device0)
+        print("backward"*10)
+        print(res)
         return None, res, None, None, None
 
 def gspmmv(graph, input1, dim_0, dim_1, device0):

@@ -43,10 +43,11 @@ class GCN_Byan(torch.nn.Module):
         super().__init__()
         self.conv1 = GraphConv_Byan(in_features, hidden_features, bias, device=device)
         self.conv2 = GraphConv_Byan(hidden_features, out_features, bias, device=device)
+        self.relu = torch.nn.ReLU()
 
     def forward(self, g, inputs):
         h = self.conv1(g, inputs)
-        h = F.relu(h)
+        h = self.relu(h)
         h = self.conv2(g, h)
         return h
     
@@ -64,7 +65,7 @@ if __name__ == "__main__":
         [6, 9, 3, 1]
     ]).requires_grad_(True)
     _spB = spB.to(device)
-    model = GCN_Byan(5, 4, 2, device=device)
+    model = GCN_Byan(4, 2, 4, device=device, bias=False)
     optimizer = torch.optim.SGD(model.parameters() ,lr=0.01)
     Cspmm = model(a, _spB)
     print(Cspmm)
@@ -74,5 +75,8 @@ if __name__ == "__main__":
     print("GRAD"*10)
     print(model.conv1.weight.data)
     print(model.conv1.weight.grad)
+    print(model.conv2.weight.data)
+    print(model.conv2.weight.grad)
     optimizer.step()
     print(model.conv1.weight.data)
+    print(model.conv2.weight.data)

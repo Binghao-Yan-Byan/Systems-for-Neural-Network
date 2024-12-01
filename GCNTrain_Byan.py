@@ -65,7 +65,6 @@ def train(hidden_feats, epoch_num, data, device):
 
         print(f"Epoch {epoch+1}/{epoch_num}, Loss:{loss.item()}")
         eval(model, g, g_csr)
-    return model, g, g_csr
 
 def eval(model, g, g_csr):
     h = g.ndata['feat']
@@ -86,4 +85,3 @@ if __name__ == "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     data = read_graph(args.dataset)
     trained_model, g, g_csr = train(hidden_feats=32, epoch_num=50, data=data, device=device)
-    eval(trained_model, g, g_csr)
