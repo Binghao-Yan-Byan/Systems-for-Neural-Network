@@ -1,6 +1,0 @@
-/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles/graphpy.dir
-/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles/libgp.so.dir
-/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles/edit_cache.dir
-/home/byan/CUDALearning/Systems-for-Neural-Network/build/CMakeFiles/rebuild_cache.dir
-/home/byan/CUDALearning/Systems-for-Neural-Network/build/pybind11/CMakeFiles/edit_cache.dir
-/home/byan/CUDALearning/Systems-for-Neural-Network/build/pybind11/CMakeFiles/rebuild_cache.dir
