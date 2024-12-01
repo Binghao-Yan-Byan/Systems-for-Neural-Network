@@ -1,6 +1,6 @@
 import torch
 import torch.utils
-from LeNet300100_Byan import LeNet300100_Byan
+from LeNet_Byan import LeNet_Byan
 from torchvision import datasets, transforms
 
 device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
@@ -11,7 +11,7 @@ train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=64,
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform, download=True)
 test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=64, shuffle=False)
 
-model = LeNet300100_Byan(device)
+model = LeNet_Byan(device)
 criterion = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 

@@ -1,6 +1,6 @@
 import torch
 import torch.utils
-import LeNet300100
+import LeNet
 from torchvision import datasets, transforms
 #import time
 #import datetime
@@ -15,7 +15,7 @@ train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=bat
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform, download=True)
 test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
 
-model = LeNet300100.LeNet300100().to(device)
+model = LeNet.LeNet300100().to(device)
 criterion = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 

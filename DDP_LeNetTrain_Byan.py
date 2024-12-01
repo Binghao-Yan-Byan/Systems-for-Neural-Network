@@ -6,7 +6,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import DataLoader, DistributedSampler
 import torch.nn as nn
 import torch.optim as optim
-from LeNet300100_Byan import LeNet300100_Byan
+from LeNet_Byan import LeNet_Byan
 from torchvision import datasets, transforms
 
 device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
@@ -21,7 +21,7 @@ def train(rank, world_size):
     dist.init_process_group("nccl", rank=rank, world_size=world_size)
     torch.cuda_set_device(rank)
     device = rank
-    model = LeNet300100_Byan(device)
+    model = LeNet_Byan(device)
     model = DDP(model, device_ids=[rank])
     epochs = 20
     optimizer = optim.SGD(model.parameters(), lr=0.01)

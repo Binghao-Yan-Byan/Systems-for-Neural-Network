@@ -1,7 +1,7 @@
 import torch
-from Linear_Byan import Linear_Byan
+from LeNet_Linear_Byan import Linear_Byan
 
-class LeNet300100_Byan(torch.nn.Module):
+class LeNet_Byan(torch.nn.Module):
     def __init__(self, device):
         super().__init__()
         self.fc1 = Linear_Byan(28*28, 300, device=device)
