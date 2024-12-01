@@ -25,9 +25,8 @@ def cleanup_ddp():
 
 def ddp_train(rank, world_size):
     setup_ddp(rank, world_size)
-
-
     device = torch.device(f'cuda:{rank}')
+    torch.cuda.set_device(rank)
     transform = transforms.Compose([transforms.ToTensor()])
     train_dataset = datasets.MNIST(root='./data', train=True, transform=transform, download=True)
     sampler = DistributedSampler(train_dataset, num_replicas=world_size, rank=rank)
