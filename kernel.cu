@@ -9,9 +9,7 @@ void gemm(float *input1, float *input2, int N, int D, int M, float *output){
     int colStep = blockDim.x;
     for(int k = 0; k < D; k ++){
         for(int j = colIdx; j < M; j += colStep){
-            // printf("%d, %d, %d = %f-%f\n",rowIdx, k, j, input1[rowIdx*D + k], input2[k*M + j]);
             output[rowIdx*M + j] += input1[rowIdx*D + k] * input2[k*M + j];
-            // printf("%d, %d, %d = %f\n", rowIdx, k, j, output[rowIdx*M + j]);
         }
     }
 }
@@ -42,9 +40,6 @@ void spmm(int32_t *ptrs, int32_t*dsts, int32_t *degree, float *feats, int32_t N,
             }
         }
     }
-    // for(int i = colIdx; i < F; i += colStep){
-    //     printf("(%d, %d) = %f\n", rowIdx, i, output[rowIdx*F+i]);
-    // }
 }
 
 /*
