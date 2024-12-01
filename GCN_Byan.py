@@ -36,6 +36,7 @@ class GraphConv_Byan(torch.nn.Module):
         result = pytorch_apis.gspmmv(g, mat, input.shape[0], self.out_features, self.device)
         if self.bias is not None:
             result = result + self.bias
+        print("forwad---->\n", result)
         return result
     
 class GCN_Byan(torch.nn.Module):
