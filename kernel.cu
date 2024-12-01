@@ -1,7 +1,6 @@
 #include "kernel.h"
 #include <iostream>
 #include <math.h>
-
 __global__
 void gemm(float *input1, float *input2, int N, int D, int M, float *output){
     int rowIdx = blockIdx.x;
@@ -25,23 +24,21 @@ void gemm(array2d_t<float>& input1, array2d_t<float>& input2, array2d_t<float>& 
 }
 
 __global__
-void spmm(int32_t *ptrs, int32_t*dsts, int32_t *degree, float *feats, int32_t N, int32_t F, float *output){
+void gspmm(int32_t *ptrs, int32_t*dsts, int32_t *degree, float *input1, int32_t N, int32_t F, float *output){
     int rowIdx = blockIdx.x;
     int colIdx = threadIdx.x;
     int colStep = blockDim.x;
-    if(rowIdx < N){
-        int offset = ptrs[rowIdx], boundary = ptrs[rowIdx+1];
-        for(int k = offset; k < boundary; k ++){
-            float ni = 1/sqrt(1.0*degree[rowIdx]);
-            int dst = dsts[k];
-            float nj = degree[dst]?1/sqrt(1.0*degree[dst]):0;
-            for(int j = colIdx; j < F; j += colStep){
-                output[rowIdx*F+j] += ni*nj*feats[dst*F+j];
-            }
+    int offset = ptrs[rowIdx], boundary = ptrs[rowIdx+1];
+    for(int k = offset; k < boundary; k ++){
+        float ni = 1/sqrt(1.0*degree[rowIdx]);
+        int dst = dsts[k];
+        float nj = degree[dst]?1/sqrt(1.0*degree[dst]):0;
+        if(colIdx < F)
+        for(int j = colIdx; j < F; j += colStep){
+            output[rowIdx*F+j] += ni*nj*input1[dst*F+j];
         }
     }
 }
-
 /*
  * input1: CSR pointer     num_nodes+1
  * input2: dstsource
@@ -55,7 +52,6 @@ void gspmmv(graph_t& graph, array2d_t<float>& input1, array2d_t<float>& output){
     int32_t threadsPerBlock = 64;
     int32_t blocks = N;
     int32_t *d_ptr, *d_dst, *d_dgr;
-    
     cudaMalloc(&d_ptr, (graph.a_vcount+1)*sizeof(int32_t));
     cudaMalloc(&d_dst, (graph.a_dstsize)*sizeof(int32_t));
     cudaMalloc(&d_dgr, (graph.a_vcount)*sizeof(int32_t));
@@ -63,9 +59,8 @@ void gspmmv(graph_t& graph, array2d_t<float>& input1, array2d_t<float>& output){
     cudaMemcpy(d_ptr, graph.offset, (graph.a_vcount+1)*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(d_dst, graph.nebrs, graph.a_dstsize*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(d_dgr, graph.dgrs, graph.a_vcount*sizeof(int), cudaMemcpyHostToDevice);
-    spmm<<<blocks, threadsPerBlock>>>(d_ptr, d_dst, d_dgr, input1.data_ptr, N, F, output.data_ptr);
+    gspmm<<<blocks, threadsPerBlock>>>(d_ptr, d_dst, d_dgr, input1.data_ptr, N, F, output.data_ptr);
     cudaDeviceSynchronize();
-
     cudaFree(d_ptr);
     cudaFree(d_dst);
     cudaFree(d_dgr);

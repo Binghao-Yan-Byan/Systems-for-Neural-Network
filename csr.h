@@ -18,18 +18,18 @@ public:
     void save_graph(const string& full_path) {};
     void load_graph(const string& full_path) {};
     void print_graph(){
-        cout << "OFFSET" << endl;
-        for(int i = 0; i < this->a_vcount; i ++){
+        for(int i = 0; i < this->a_vcount+1; i ++){
             cout<<this->offset[i]<<" ";
         }
-        cout << "NEIGHBORS" << endl;
+        cout << endl;
         for(int i = 0; i < this->a_dstsize; i ++){
             cout<<this->nebrs[i]<<" ";
         }
-        cout << "DEGREES" << endl;
+        cout << endl;
         for(int i = 0; i < this->a_vcount; i ++){
             cout<<this->dgrs[i]<<" ";
         }
+        cout << endl;
     };
     void load_graph_noeid(const string& full_path) {};
     int get_vcount() {return this->a_vcount;};

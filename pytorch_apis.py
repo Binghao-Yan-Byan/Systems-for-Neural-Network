@@ -33,4 +33,5 @@ class gspmmv_impl(th.autograd.Function):
 
 def gspmmv(graph, input1, dim_0, dim_1, device0):
     return gspmmv_impl.apply(graph, input1, dim_0, dim_1, device0)
+    
 

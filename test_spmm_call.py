@@ -29,7 +29,6 @@ Degree = np.array([1, 1, 1, 1, 1], dtype=np.int32)
 a = graphpy.init_graph(Ptr, Dst, Degree)
 print(a.get_vcount())
 print(a.get_edge_count())
-a.print_graph()
 
 Bspmm = torch.Tensor([
     [3, 6, 1, 9],
@@ -37,6 +36,6 @@ Bspmm = torch.Tensor([
     [8, 6, 9, 2],
     [5, 2, 8, 7],
     [6, 9, 3, 1]
-])
+]).to(device)
 Cspmm = pytorch_apis.gspmmv(a, Bspmm, 5, 4, device)
 print(Cspmm)
