@@ -33,7 +33,6 @@ void gspmm(int32_t *ptrs, int32_t*dsts, int32_t *degree, float *input1, int32_t 
         float ni = 1/sqrt(1.0*degree[rowIdx]);
         int dst = dsts[k];
         float nj = degree[dst]?1/sqrt(1.0*degree[dst]):0;
-        if(colIdx < F)
         for(int j = colIdx; j < F; j += colStep){
             output[rowIdx*F+j] += ni*nj*input1[dst*F+j];
         }
