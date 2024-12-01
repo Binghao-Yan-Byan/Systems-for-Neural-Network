@@ -13,14 +13,3 @@ class GCN(nn.Module):
         h = F.relu(h)
         h = self.conv2(g, h)
         return h
-
-class GCN(nn.Module):
-    def __init__(self, in_feats, hidden_feats, out_feats):
-        super().__init__()
-        self.conv1 = GraphConv(in_feats, hidden_feats)
-        self.conv2 = GraphConv(hidden_feats, out_feats)
-
-    def forward(self, g, inputs):
-        h = self.conv2(F.relu(self.conv1(g, inputs)))
-        return h
-
