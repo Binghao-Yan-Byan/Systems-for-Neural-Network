@@ -8,10 +8,10 @@ import torch.nn as nn
 import torch.optim as optim
 from LeNet_Byan import LeNet_Byan
 from torchvision import datasets, transforms
-
-device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
-
-
+    
+transform = transforms.Compose([
+    transforms.ToTensor(),
+])
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform, download=True)
 test_loader = DataLoader(dataset=test_dataset, batch_size=64, shuffle=False)
 
@@ -25,6 +25,7 @@ def cleanup_ddp():
 
 def ddp_train(rank, world_size):
     setup_ddp(rank, world_size)
+
 
     device = torch.device(f'cuda:{rank}')
     transform = transforms.Compose([transforms.ToTensor()])
