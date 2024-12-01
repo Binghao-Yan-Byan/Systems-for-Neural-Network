@@ -54,7 +54,6 @@ void gspmmv(graph_t& graph, array2d_t<float>& input1, array2d_t<float>& output){
     cudaMalloc(&d_ptr, (graph.a_vcount+1)*sizeof(int32_t));
     cudaMalloc(&d_dst, (graph.a_dstsize)*sizeof(int32_t));
     cudaMalloc(&d_dgr, (graph.a_vcount)*sizeof(int32_t));
-
     cudaMemcpy(d_ptr, graph.offset, (graph.a_vcount+1)*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(d_dst, graph.nebrs, graph.a_dstsize*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(d_dgr, graph.dgrs, graph.a_vcount*sizeof(int), cudaMemcpyHostToDevice);

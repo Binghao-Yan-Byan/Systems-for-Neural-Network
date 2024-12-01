@@ -32,11 +32,10 @@ class GraphConv_Byan(torch.nn.Module):
             init.uniform_(self.bias, -bound, bound)
     
     def forward(self, g, input):
-        mat = pytorch_apis.gemm(input, self.weight, input.shape[0], self.out_features, self.device) 
+        mat = pytorch_apis.gemm(input, self.weight, input.shape[0], self.out_features, self.device)
         result = pytorch_apis.gspmmv(g, mat, input.shape[0], self.out_features, self.device)
         if self.bias is not None:
             result = result + self.bias
-        print("forwad---->\n", result)
         return result
     
 class GCN_Byan(torch.nn.Module):
@@ -66,7 +65,7 @@ if __name__ == "__main__":
         [6, 9, 3, 1]
     ]).requires_grad_(True)
     _spB = spB.to(device)
-    model = GCN_Byan(4, 2, 4, device=device, bias=False)
+    model = GCN_Byan(4, 2, 4, device=device, bias=True)
     optimizer = torch.optim.SGD(model.parameters() ,lr=0.01)
     Cspmm = model(a, _spB)
     print(Cspmm)
