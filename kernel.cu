@@ -45,11 +45,12 @@ void gspmm(int32_t *ptrs, int32_t*dsts, int32_t *degree, float *input1, int32_t 
  * input4: feature matrix  num_nodes x num_features
  * output: output[i, :] = input2[i]*input2[j]*input3[j] if (i, j) in edges
  */
-void gspmmv(graph_t& graph, array2d_t<float>& input1, array2d_t<float>& output){
+void gspmmv(graph_t& graph, array2d_t<float>& input1, array2d_t<float>& output, uintptr_t stream_handle){
     int32_t N = graph.vcount;
     int32_t F = input1.col_count;
     int32_t threadsPerBlock = 64;
     int32_t blocks = N;
-    gspmm<<<blocks, threadsPerBlock>>>(graph.offset, graph.nebrs, graph.dgrs, input1.data_ptr, N, F, output.data_ptr);
+    cudaStream_t cuda_stream = reinterpret_cast<cudaStream_t>(stream_handle);
+    gspmm<<<blocks, threadsPerBlock, 0, cuda_stream>>>(graph.offset, graph.nebrs, graph.dgrs, input1.data_ptr, N, F, output.data_ptr);
     cudaDeviceSynchronize();
 }

@@ -6,10 +6,10 @@ inline void export_kernel(py::module &m) {
     return gemm(input1_array, input2_array, output_array);
     }
   );
-    m.def("gspmmv",[](graph_t& graph, py::capsule& input1, py::capsule& output){
+    m.def("gspmmv",[](graph_t& graph, py::capsule& input1, py::capsule& output, uintptr_t stream_handle){
         array2d_t<float> input1_array = capsule_to_array2d(input1);
         array2d_t<float> output_array = capsule_to_array2d(output);
-    return gspmmv(graph, input1_array, output_array);
+    return gspmmv(graph, input1_array, output_array, stream_handle);
     }
   );
 }
