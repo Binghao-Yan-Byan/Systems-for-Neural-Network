@@ -84,4 +84,4 @@ if __name__ == "__main__":
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     data = read_graph(args.dataset)
-    trained_model, g, g_csr = train(hidden_feats=32, epoch_num=50, data=data, device=device)
+    train(hidden_feats=32, epoch_num=100, data=data, device=device)
